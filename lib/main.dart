@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'CalendarMenu.dart';
 
 void main() {
   runApp(MyApp());
@@ -6,7 +7,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -31,59 +32,32 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int number = 0; //การสร้าง state
-
+  List<CalendarMenu> menu=[
+    CalendarMenu("ปฏิทินตั้งโต๊ะ", "100", "assets/images/image1.jpg"),
+    CalendarMenu("ปฏิทินแขวน", "80", "assets/images/image2.jpg"),
+    CalendarMenu("ปฏิทินพกพา", "10", "assets/images/image3.jpg"),
+    CalendarMenu("ปฏิทินโปสเตอร์", "50", "assets/images/image4.jpg"),
+  ];
+  //แสดงผลข้อมูล
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("HelloWorld?!"),
+        title: Text("Calendar Store"),
       ),
       body: ListView.builder(
-          itemCount: 6,
+          itemCount: menu.length,
           itemBuilder: (BuildContext context, int index) {
+            CalendarMenu calendar=menu[index];
             return ListTile(
-              title: Text("ListViewBuilderNo $index"),
+              leading: Image.asset(calendar.img),
+              title: Text("no.${index+1} " + calendar.name,style: TextStyle(fontSize: 20),),
+              subtitle: Text("ราคา: " + calendar.price +" บาท",style: TextStyle(fontSize: 16, color: Colors.red,),),
+              onTap: (){
+                print("You have selected" + calendar.name);
+              }
             );
           }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          addNumber();
-        },
-        child: Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-      ),
     );
-  }
-
-  void addNumber() {
-    setState(() {
-      number++;
-    });
-  }
-
-  List<Widget> getData(int count) {
-    List<Widget> data = [];
-    data.add(Text("Welcome to calendar store"));
-    data.add(Text("This is button"));
-    data.add(
-      Text("$number", style: TextStyle(fontSize: 24)),
-    );
-    for (var i = 0; i < count; i++) {
-      var menu = ListTile(
-        title: Text(
-          "List no. ${i + 1}",
-          style: TextStyle(fontSize: 24),
-        ),
-        subtitle: Text(
-          "sub-List no. ${i % 3}",
-          style: TextStyle(fontSize: 12),
-        ),
-      );
-      data.add(menu);
-    }
-    return data;
   }
 }
