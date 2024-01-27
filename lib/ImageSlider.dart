@@ -5,9 +5,8 @@ class ImageSlider extends StatelessWidget {
   // const ImageSlider({super.key});
 
   List imageList;
-  int activeIndex;
 
-  ImageSlider(this.imageList, this.activeIndex, {super.key});
+  ImageSlider(this.imageList, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +24,7 @@ class ImageSlider extends StatelessWidget {
             autoPlayAnimationDuration: const Duration(seconds: 2),
             autoPlayInterval: const Duration(seconds: 5),
             enlargeCenterPage: true,
-            enlargeStrategy: CenterPageEnlargeStrategy.zoom,
-            onPageChanged: (index, reason) =>
-                setState(() => activeIndex = index),
+            enlargeStrategy: CenterPageEnlargeStrategy.zoom
           ),
         ),
       ],

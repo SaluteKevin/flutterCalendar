@@ -1,7 +1,7 @@
 import 'package:calendar_app/ListBox.dart';
 import 'package:calendar_app/splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'CalendarMenu.dart';
+import 'CalendarInfo.dart';
 import 'ListBox.dart';
 
 void main(){
