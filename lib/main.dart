@@ -1,8 +1,8 @@
-import 'package:calendar_app/ListBox.dart';
-import 'package:calendar_app/splash_screen.dart';
+import 'package:calendar_app/screens/ListBox.dart';
+import 'package:calendar_app/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'CalendarInfo.dart';
-import 'ListBox.dart';
+import 'models/CalendarInfo.dart';
+import 'screens/ListBox.dart';
 
 void main(){
   runApp(const MyApp());

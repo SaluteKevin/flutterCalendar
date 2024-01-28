@@ -1,6 +1,6 @@
-import 'package:calendar_app/CalendarInfo.dart';
-import 'package:calendar_app/CartPage.dart';
-import 'package:calendar_app/ViewPage.dart';
+import 'package:calendar_app/models/CalendarInfo.dart';
+import 'package:calendar_app/screens/CartPage.dart';
+import 'package:calendar_app/screens/ViewPage.dart';
 import 'package:flutter/material.dart';
 import 'ImageSlider.dart';
 
@@ -36,28 +36,28 @@ class _MainPageState extends State<MainPage> {
   ];
 
   List<CalendarInfo> calendars = [
-    CalendarInfo("ปฏิทินรูปสัตว์", "Desktop", "100", "assets/images/image1.jpg",
-        "available"),
+    CalendarInfo("ปฏิทินรูปสัตว์", "Desktop", 100, "assets/images/image1.jpg",
+        "20"),
     CalendarInfo(
-        "ปฏิทินตัวการ์ตูนสัตว์", "Hanging", "80", "assets/images/image2.jpg", "available"),
-    CalendarInfo("ปฏิทินสวนสัตว์", "Pocket", "10", "assets/images/image3.jpg",
-        "not available"),
-    CalendarInfo("ปฏิทินสัตว์ป่า", "Poster", "50", "assets/images/image4.jpg",
-        "available"),
-    CalendarInfo("ปฏิทินทำงาน", "Pocket", "10", "assets/images/image5.jpg",
-        "not available"),
-    CalendarInfo("ปฏิทินภาพศิลป์", "Desktop", "100", "assets/images/image6.jpg",
-        "available"),
-    CalendarInfo("ปฏิทินแมวน้อย", "Desktop", "100",  "assets/images/image7.jpg",
-        "available"),
-    CalendarInfo("ปฏิทินแฟนตาซี", "Pocket", "10", "assets/images/image8.jpg",
-        "available"),
-    CalendarInfo("ปฏิทินอวกาศ", "Pocket", "10", "assets/images/image9.jpg",
-        "available"),
-    CalendarInfo("ปฏิทินนักบินอวกาศ", "Poster", "50", "assets/images/image10.jpg",
-        "available"),
-    CalendarInfo("ปฏิทินเฉลิมฉลอง", "Desktop", "100", "assets/images/image11.jpg",
-        "available"),
+        "ปฏิทินตัวการ์ตูนสัตว์", "Hanging", 80, "assets/images/image2.jpg", "10"),
+    CalendarInfo("ปฏิทินสวนสัตว์", "Pocket", 10, "assets/images/image3.jpg",
+        "0"),
+    CalendarInfo("ปฏิทินสัตว์ป่า", "Poster", 50, "assets/images/image4.jpg",
+        "50"),
+    CalendarInfo("ปฏิทินทำงาน", "Pocket", 10, "assets/images/image5.jpg",
+        "0"),
+    CalendarInfo("ปฏิทินภาพศิลป์", "Desktop", 100, "assets/images/image6.jpg",
+        "20"),
+    CalendarInfo("ปฏิทินแมวน้อย", "Desktop", 100,  "assets/images/image7.jpg",
+        "10"),
+    CalendarInfo("ปฏิทินแฟนตาซี", "Pocket", 10, "assets/images/image8.jpg",
+        "30"),
+    CalendarInfo("ปฏิทินอวกาศ", "Pocket", 10, "assets/images/image9.jpg",
+        "40"),
+    CalendarInfo("ปฏิทินนักบินอวกาศ", "Poster", 50, "assets/images/image10.jpg",
+        "60"),
+    CalendarInfo("ปฏิทินเฉลิมฉลอง", "Desktop", 100, "assets/images/image11.jpg",
+        "15"),
   ];
 
   @override
@@ -108,7 +108,7 @@ class _MainPageState extends State<MainPage> {
                     "no.${index + 1} ${calendar.name}",
                     style: const TextStyle(fontSize: 20),
                   ),
-                  subtitle: calendar.status == "not available"
+                  subtitle: calendar.stock == "0"
                       ? const Text(
                           "สินค้าหมด",
                           style: TextStyle(
