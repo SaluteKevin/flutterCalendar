@@ -127,9 +127,7 @@ class _MainPageState extends State<MainPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) {
-                          return ViewPage();
-                        },
+                        builder: (context) => ViewPage(calendar: calendar)
                       ),
                     );
                   },

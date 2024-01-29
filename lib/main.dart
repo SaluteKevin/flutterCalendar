@@ -1,11 +1,15 @@
-import 'package:calendar_app/screens/ListBox.dart';
+import 'package:calendar_app/providers/cart_provider.dart';
 import 'package:calendar_app/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'models/CalendarInfo.dart';
-import 'screens/ListBox.dart';
+import 'package:provider/provider.dart';
 
-void main(){
-  runApp(const MyApp());
+void main() {
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => CartProvider(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

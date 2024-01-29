@@ -1,50 +1,32 @@
-import 'package:calendar_app/models/CalendarInfo.dart';
-import 'package:calendar_app/providers/payment_provider.dart';
+import 'package:calendar_app/models/ShoppingCart.dart';
+import 'package:calendar_app/providers/cart_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ViewItem extends StatelessWidget {
-  const ViewItem({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        title: "Daily Table",
-        home: MultiProvider(providers: [
-          ChangeNotifierProvider(create: (context){
-            return PaymentProvider();
-          })
-        ],
-        child: const CartPage()),
-        theme: ThemeData(
-          useMaterial3: true,
-          appBarTheme: AppBarTheme(color: Colors.blue[300]),
-        ),
-      );
-  }
-}
-
-class CartPage extends StatefulWidget {
+class CartPage extends StatelessWidget {
   const CartPage({super.key});
 
   @override
-  State<CartPage> createState() => _CartPageState();
-}
-
-CalendarInfo calendar = CalendarInfo(
-    "ปฏิทินเฉลิมฉลอง", "Desktop", 100, "assets/images/image11.jpg", "0");
-
-class _CartPageState extends State<CartPage> {
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("Carts", style: TextStyle(color: Colors.white)),
-        ),
-        body: ListView.builder(
-            itemCount: 3,
-            itemBuilder: (contest, int index) {
-              return Card(
+      appBar: AppBar(
+        title: const Text("Cart", style: TextStyle(color: Colors.white)),
+      ),
+      body: Consumer<CartProvider>(builder: (context, value, child) {
+        var count = value.cart.length;
+        if (count <= 0) {
+          return Center(
+            child: Text(
+              "ยังไม่มีสินค้าในนี้",
+              style: TextStyle(fontSize: 32),
+            ),
+          );
+        } else {
+          return ListView.builder(
+              itemCount: value.cart.length,
+              itemBuilder: (context, int index) {
+                ShoppingCart data = value.cart[index];
+                return Card(
                   elevation: 1,
                   margin: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                   child: Padding(
@@ -52,14 +34,17 @@ class _CartPageState extends State<CartPage> {
                     child: ListTile(
                       leading: SizedBox(
                         child: Image.asset(
-                          calendar.img,
+                          data.calendar.img,
                         ),
                       ),
-                      title: Text(calendar.name),
-                      subtitle: Text("${calendar.price} บาท"),
+                      title: Text(data.calendar.name),
+                      subtitle: Text("${data.calendar.price} บาท"),
                     ),
                   ),
                 );
-  }));
+              });
+        }
+      }),
+    );
   }
 }
