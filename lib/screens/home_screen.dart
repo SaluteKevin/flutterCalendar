@@ -2,6 +2,7 @@ import 'package:calendar_app/models/CalendarInfo.dart';
 import 'package:calendar_app/screens/CartPage.dart';
 import 'package:calendar_app/screens/ViewPage.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'ImageSlider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -36,27 +37,27 @@ class _MainPageState extends State<MainPage> {
   ];
 
   List<CalendarInfo> calendars = [
-    CalendarInfo("ปฏิทินรูปสัตว์", "Desktop", 100, "assets/images/image1.jpg",
+    CalendarInfo("ปฏิทินรูปสัตว์", "ตั้งโต๊ะ", 100, "assets/images/image1.jpg",
         "20"),
     CalendarInfo(
-        "ปฏิทินตัวการ์ตูนสัตว์", "Hanging", 80, "assets/images/image2.jpg", "10"),
-    CalendarInfo("ปฏิทินสวนสัตว์", "Pocket", 10, "assets/images/image3.jpg",
+        "ปฏิทินตัวการ์ตูนสัตว์", "แขวน", 80, "assets/images/image2.jpg", "10"),
+    CalendarInfo("ปฏิทินสวนสัตว์", "พกพา", 10, "assets/images/image3.jpg",
         "0"),
-    CalendarInfo("ปฏิทินสัตว์ป่า", "Poster", 50, "assets/images/image4.jpg",
+    CalendarInfo("ปฏิทินสัตว์ป่า", "โปสเตอร์", 50, "assets/images/image4.jpg",
         "50"),
-    CalendarInfo("ปฏิทินทำงาน", "Pocket", 10, "assets/images/image5.jpg",
+    CalendarInfo("ปฏิทินทำงาน", "พกพา", 10, "assets/images/image5.jpg",
         "0"),
-    CalendarInfo("ปฏิทินภาพศิลป์", "Desktop", 100, "assets/images/image6.jpg",
+    CalendarInfo("ปฏิทินภาพศิลป์", "ตั้งโต๊ะ", 100, "assets/images/image6.jpg",
         "20"),
-    CalendarInfo("ปฏิทินแมวน้อย", "Desktop", 100,  "assets/images/image7.jpg",
+    CalendarInfo("ปฏิทินแมวน้อย", "ตั้งโต๊ะ", 100,  "assets/images/image7.jpg",
         "10"),
-    CalendarInfo("ปฏิทินแฟนตาซี", "Pocket", 10, "assets/images/image8.jpg",
+    CalendarInfo("ปฏิทินแฟนตาซี", "พกพา", 10, "assets/images/image8.jpg",
         "30"),
-    CalendarInfo("ปฏิทินอวกาศ", "Pocket", 10, "assets/images/image9.jpg",
+    CalendarInfo("ปฏิทินอวกาศ", "พกพา", 10, "assets/images/image9.jpg",
         "40"),
-    CalendarInfo("ปฏิทินนักบินอวกาศ", "Poster", 50, "assets/images/image10.jpg",
+    CalendarInfo("ปฏิทินนักบินอวกาศ", "โปสเตอร์", 50, "assets/images/image10.jpg",
         "60"),
-    CalendarInfo("ปฏิทินเฉลิมฉลอง", "Desktop", 100, "assets/images/image11.jpg",
+    CalendarInfo("ปฏิทินเฉลิมฉลอง", "ตั้งโต๊ะ", 100, "assets/images/image11.jpg",
         "15"),
   ];
 
@@ -86,9 +87,9 @@ class _MainPageState extends State<MainPage> {
             child: Container(
               decoration: BoxDecoration(color: Colors.blue[300]),
               child: const Padding(
-                padding: EdgeInsets.fromLTRB(14, 0, 20, 0),
+                padding: EdgeInsets.fromLTRB(14, 4, 20, 4),
                 child: Text(
-                  'Calendar List',
+                  'สินค้า',
                   style: TextStyle(
                     fontSize: 26,
                     color: Colors.white,
@@ -98,14 +99,17 @@ class _MainPageState extends State<MainPage> {
             ),
           ),
           Expanded(
-            child: ListView.builder(
+            child: ListView.separated(
               itemCount: calendars.length,
+              separatorBuilder: (BuildContext context, int index){
+                return const Divider(height: 1,);
+              },
               itemBuilder: (BuildContext context, int index) {
                 CalendarInfo calendar = calendars[index];
                 return ListTile(
                   leading: Image.asset(calendar.img),
                   title: Text(
-                    "no.${index + 1} ${calendar.name}",
+                    calendar.name,
                     style: const TextStyle(fontSize: 20),
                   ),
                   subtitle: calendar.stock == "0"
@@ -117,7 +121,7 @@ class _MainPageState extends State<MainPage> {
                           ),
                         )
                       : Text(
-                          "ราคา: ${calendar.price} บาท",
+                          "${NumberFormat("#,###.##").format(calendar.price)} บาท",
                           style: const TextStyle(
                             fontSize: 16,
                             color: Colors.grey,

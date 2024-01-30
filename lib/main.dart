@@ -1,14 +1,12 @@
-import 'package:calendar_app/providers/cart_provider.dart';
+import 'package:calendar_app/providers/cartProvider.dart';
 import 'package:calendar_app/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:postgres/postgres.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => CartProvider(),
-      child: const MyApp(),
-    ),
+    const MyApp()
   );
 }
 
@@ -17,8 +15,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MultiProvider(providers: [
+      
+      ChangeNotifierProvider(create: (context){
+        return CartProvider();
+      })
+    ],
+    
+    child: const MaterialApp(
       home: SplashScreen(),
+    )
     );
   }
 }

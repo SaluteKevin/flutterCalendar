@@ -1,5 +1,6 @@
 import 'package:calendar_app/models/ShoppingCart.dart';
-import 'package:calendar_app/providers/cart_provider.dart';
+import 'package:calendar_app/providers/cartProvider.dart';
+import 'package:calendar_app/screens/ViewPage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,10 +16,10 @@ class CartPage extends StatelessWidget {
       body: Consumer<CartProvider>(builder: (context, value, child) {
         var count = value.cart.length;
         if (count <= 0) {
-          return Center(
+          return const Center(
             child: Text(
               "ยังไม่มีสินค้าในนี้",
-              style: TextStyle(fontSize: 32),
+              style: const TextStyle(fontSize: 32),
             ),
           );
         } else {
@@ -26,21 +27,56 @@ class CartPage extends StatelessWidget {
               itemCount: value.cart.length,
               itemBuilder: (context, int index) {
                 ShoppingCart data = value.cart[index];
-                return Card(
-                  elevation: 1,
-                  margin: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                  child: Padding(
-                    padding: EdgeInsets.all(10),
-                    child: ListTile(
-                      leading: SizedBox(
-                        child: Image.asset(
-                          data.calendar.img,
+                return 
+                
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ViewPage(calendar: data.calendar)
+                      ),
+                    );
+                  },
+                  child: Card(
+                    elevation: 1,
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              child: Image.asset(
+                                data.calendar.img,
+                                height: 120,
+                                width: 120,
+                              ),
+                            ),
+                            Column(
+                              children: [
+                                Text(data.calendar.name),
+                                Text("${data.calendar.price} บาท"),
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 0, 16, 0),
+                              child: IconButton(
+                                  onPressed: () {
+                                    Provider.of<CartProvider>(context,
+                                            listen: false)
+                                        .removeItem(value.cart[index]);
+                                  },
+                                  icon: const Icon(
+                                    Icons.remove_shopping_cart,
+                                    color: Colors.grey,
+                                  )),
+                            )
+                          ],
                         ),
                       ),
-                      title: Text(data.calendar.name),
-                      subtitle: Text("${data.calendar.price} บาท"),
                     ),
-                  ),
                 );
               });
         }
