@@ -12,6 +12,7 @@ class CartPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Cart", style: TextStyle(color: Colors.white)),
+        toolbarHeight: 48,
       ),
       body: Consumer<CartProvider>(builder: (context, value, child) {
         var count = value.cart.length;
@@ -27,15 +28,13 @@ class CartPage extends StatelessWidget {
               itemCount: value.cart.length,
               itemBuilder: (context, int index) {
                 ShoppingCart data = value.cart[index];
-                return 
-                
-                GestureDetector(
+                return GestureDetector(
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ViewPage(calendar: data.calendar)
-                      ),
+                          builder: (context) =>
+                              ViewPage(calendar: data.calendar)),
                     );
                   },
                   child: Card(
@@ -45,38 +44,38 @@ class CartPage extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                       child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedBox(
-                              child: Image.asset(
-                                data.calendar.img,
-                                height: 120,
-                                width: 120,
-                              ),
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            child: Image.asset(
+                              data.calendar.img,
+                              height: 120,
+                              width: 120,
                             ),
-                            Column(
-                              children: [
-                                Text(data.calendar.name),
-                                Text("${data.calendar.price} บาท"),
-                              ],
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 0, 16, 0),
-                              child: IconButton(
-                                  onPressed: () {
-                                    Provider.of<CartProvider>(context,
-                                            listen: false)
-                                        .removeItem(value.cart[index]);
-                                  },
-                                  icon: const Icon(
-                                    Icons.remove_shopping_cart,
-                                    color: Colors.grey,
-                                  )),
-                            )
-                          ],
-                        ),
+                          ),
+                          Column(
+                            children: [
+                              Text(data.calendar.name),
+                              Text("${data.calendar.price} บาท"),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 16, 0),
+                            child: IconButton(
+                                onPressed: () {
+                                  Provider.of<CartProvider>(context,
+                                          listen: false)
+                                      .removeItem(value.cart[index]);
+                                },
+                                icon: const Icon(
+                                  Icons.remove_shopping_cart,
+                                  color: Colors.grey,
+                                )),
+                          )
+                        ],
                       ),
                     ),
+                  ),
                 );
               });
         }

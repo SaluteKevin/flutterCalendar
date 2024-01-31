@@ -1,7 +1,6 @@
 import 'package:calendar_app/models/CalendarInfo.dart';
 import 'package:calendar_app/models/ShoppingCart.dart';
 import 'package:calendar_app/providers/cartProvider.dart';
-import 'package:calendar_app/screens/CartPage.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -15,9 +14,11 @@ class ViewPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Daily Table", style: TextStyle(color: Colors.white)),
+        toolbarHeight: 48,
       ),
       body: Container(
-        decoration: BoxDecoration(color: Colors.black),
+        decoration:
+            const BoxDecoration(color: Color.fromRGBO(117, 117, 117, 1)),
         child: Column(
           children: [
             Image.asset(
@@ -104,10 +105,7 @@ class ViewPage extends StatelessWidget {
                               var provider = Provider.of<CartProvider>(context,
                                   listen: false);
                               provider.addItem(statement);
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return const CartPage();
-                              }));
+                              Navigator.pop(context);
                             },
                             child: const Padding(
                               padding: EdgeInsets.fromLTRB(6, 0, 6, 0),

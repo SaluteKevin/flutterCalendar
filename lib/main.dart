@@ -1,4 +1,6 @@
+import 'package:calendar_app/providers/calendarProvider.dart';
 import 'package:calendar_app/providers/cartProvider.dart';
+import 'package:calendar_app/providers/imageSliderProvider.dart';
 import 'package:calendar_app/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +21,14 @@ class MyApp extends StatelessWidget {
       
       ChangeNotifierProvider(create: (context){
         return CartProvider();
+      }),
+
+      ChangeNotifierProvider(create: (context){
+        return CalendarProvider();
+      }),
+
+      ChangeNotifierProvider(create: (context){
+        return ImageSliderProvider();
       })
     ],
     
